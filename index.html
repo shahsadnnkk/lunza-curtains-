@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luza Curtains | Bespoke Window Elegance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #333; /* Darker text for professionalism */
+            background-color: #fcfcfc;
+        }
+        h1, h2, h3, h4, .brand-font {
+            font-family: 'Lora', serif;
+            color: #222;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #b8860b, #d4af37); /* Muted gold/brass */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        .hero-bg-wrapper {
+            position: relative;
+            overflow: hidden;
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        .hero-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7); /* Darken image slightly for text contrast */
+            transform: translateY(0); /* Will be controlled by JS for parallax */
+            transition: transform 0.1s ease-out;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 6xl;
+            padding: 0 1rem;
+        }
+
+        /* Nav specific styles */
+        .navbar-scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom-color: rgba(230, 230, 230, 0.7);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .navbar-scrolled .text-neutral-900 {
+             color: #222; /* Ensure brand name stays visible */
+        }
+        .navbar-scrolled .text-neutral-600 {
+            color: #555;
+        }
+        .navbar-scrolled .hover\:text-yellow-600:hover {
+            color: #d4af37;
+        }
+        .navbar-scrolled .bg-yellow-600 {
+            background-color: #b8860b;
+        }
+
+    </style>
+</head>
+<body class="bg-white text-neutral-800 antialiased">
+
+    <!-- Navigation --><nav id="navbar" class="fixed w-full bg-transparent z-50 transition-all duration-300 ease-in-out py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-3xl font-bold text-neutral-900 brand-font transition-colors duration-300">Luza<span class="gradient-text">Curtains</span></a>
+                </div>
+                <div class="hidden md:flex space-x-10 items-center">
+                    <a href="#process" class="text-neutral-600 hover:text-yellow-600 transition-colors font-medium text-lg">Our Process</a>
+                    <a href="#collections" class="text-neutral-600 hover:text-yellow-600 transition-colors font-medium text-lg">Collections</a>
+                    <a href="#why-us" class="text-neutral-600 hover:text-yellow-600 transition-colors font-medium text-lg">Why Luza</a>
+                    <a href="#contact" class="text-neutral-600 hover:text-yellow-600 transition-colors font-medium text-lg">Contact</a>
+                    <a href="#contact" class="bg-yellow-600 text-white px-6 py-2 rounded-full text-lg hover:bg-yellow-700 transition-colors shadow-md">Get Started</a>
+                </div>
+                <!-- Mobile menu button --><div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-neutral-600 hover:text-yellow-600 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu --><div id="mobile-menu" class="hidden md:hidden bg-white border-t border-neutral-100 shadow-lg absolute w-full left-0 transition-all duration-300">
+            <div class="px-2 pt-2 pb-3 space-y-2 sm:px-3">
+                <a href="#process" class="block px-3 py-2 rounded-md text-base font-medium text-neutral-700 hover:text-yellow-600 hover:bg-neutral-50">Our Process</a>
+                <a href="#collections" class="block px-3 py-2 rounded-md text-base font-medium text-neutral-700 hover:text-yellow-600 hover:bg-neutral-50">Collections</a>
+                <a href="#why-us" class="block px-3 py-2 rounded-md text-base font-medium text-neutral-700 hover:text-yellow-600 hover:bg-neutral-50">Why Luza</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-neutral-700 hover:text-yellow-600 hover:bg-neutral-50">Contact</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-yellow-600 hover:bg-yellow-700 mt-4 text-center">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section --><section class="hero-bg-wrapper">
+        <img src="hero_curtains.png" alt="Elegant living room with luxurious curtains" class="hero-img" data-speed="0.3">
+        <div class="hero-content text-white reveal reveal-delay-1">
+            <h1 class="text-6xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight leading-tight drop-shadow-lg">
+                <span class="brand-font">Luza Curtains</span>
+            </h1>
+            <p class="text-xl md:text-2xl font-light mb-10 drop-shadow-md max-w-3xl mx-auto">
+                Where bespoke design meets exquisite craftsmanship. Elevate your space with custom window treatments tailored to perfection.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 reveal reveal-delay-2">
+                <a href="#collections" class="bg-yellow-600 text-white px-10 py-4 rounded-full text-xl font-medium hover:bg-yellow-700 transition shadow-lg">
+                    Explore Collections
+                </a>
+                <a href="#contact" class="bg-white text-neutral-800 border border-transparent px-10 py-4 rounded-full text-xl font-medium hover:bg-neutral-100 transition shadow-sm">
+                    Book a Consultation
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Process Section --><section id="process" class="py-24 bg-neutral-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-base text-yellow-600 font-semibold tracking-wide uppercase mb-2">Seamless Experience</h2>
+                <p class="mt-2 text-4xl leading-tight font-bold text-neutral-900 sm:text-5xl">
+                    Our Bespoke Design Process
+                </p>
+                <p class="mt-6 max-w-3xl text-xl text-neutral-600 mx-auto">
+                    From initial concept to flawless installation, we guide you every step of the way to create your dream space.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- Step 1 --><div class="text-center reveal reveal-delay-1">
+                    <div class="flex items-center justify-center w-24 h-24 mx-auto mb-6 bg-yellow-100 text-yellow-700 rounded-full text-4xl shadow-md">
+                        <i class="fas fa-ruler-combined"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-neutral-900 mb-3">1. Design & Measure</h3>
+                    <p class="text-neutral-600 text-lg leading-relaxed">Personalized consultation and precise measurements to capture your vision and space's unique character.</p>
+                </div>
+                <!-- Step 2 --><div class="text-center reveal reveal-delay-2">
+                    <div class="flex items-center justify-center w-24 h-24 mx-auto mb-6 bg-neutral-200 text-neutral-700 rounded-full text-4xl shadow-md">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-neutral-900 mb-3">2. Craft & Tailor</h3>
+                    <p class="text-neutral-600 text-lg leading-relaxed">Our skilled artisans meticulously cut and sew your chosen fabrics, ensuring impeccable quality and finish.</p>
+                </div>
+                <!-- Step 3 --><div class="text-center reveal reveal-delay-3">
+                    <div class="flex items-center justify-center w-24 h-24 mx-auto mb-6 bg-yellow-100 text-yellow-700 rounded-full text-4xl shadow-md">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-neutral-900 mb-3">3. Install & Perfect</h3>
+                    <p class="text-neutral-600 text-lg leading-relaxed">Professional installation with attention to every detail, ensuring your curtains hang beautifully and function flawlessly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image + Text Feature (e.g., Fabric Quality) --><section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <img src="fabric_closeup.png" alt="Close-up of luxurious curtain fabric texture" class="rounded-xl shadow-xl transform hover:scale-102 transition-transform duration-500">
+                </div>
+                <div class="reveal reveal-delay-2">
+                    <h2 class="text-4xl font-bold text-neutral-900 mb-6 leading-snug">
+                        Discover Unrivaled <span class="gradient-text">Fabric Quality</span>
+                    </h2>
+                    <p class="text-xl text-neutral-600 mb-6">
+                        At Luza Curtains, we believe in the power of touch. Our curated selection features the finest silks, velvets, linens, and eco-friendly blends from around the globe.
+                    </p>
+                    <ul class="text-lg text-neutral-700 space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-yellow-600 mr-3"></i> Hand-picked luxury materials</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-yellow-600 mr-3"></i> Durable and long-lasting weaves</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-yellow-600 mr-3"></i> Rich textures and vibrant colors</li>
+                    </ul>
+                    <a href="#collections" class="inline-block bg-neutral-800 text-white px-8 py-3 rounded-full text-lg hover:bg-neutral-700 transition shadow-lg">
+                        View Fabric Swatches
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections Section --><section id="collections" class="py-24 bg-neutral-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-base text-yellow-600 font-semibold tracking-wide uppercase mb-2">Curated for Your Home</h2>
+                <p class="mt-2 text-4xl leading-tight font-bold text-neutral-900 sm:text-5xl">
+                    Our Exquisite Collections
+                </p>
+                <p class="mt-6 max-w-3xl text-xl text-neutral-600 mx-auto">
+                    Explore a diverse range of styles, from timeless classics to modern minimalism, each designed to inspire.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Collection Item 1 --><div class="bg-white rounded-xl shadow-lg overflow-hidden reveal reveal-delay-1 transform hover:scale-102 transition-transform duration-300">
+                    <img src="sheer_curtains.png" alt="Light and airy sheer curtains in a living room" class="w-full h-72 object-cover">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-semibold text-neutral-900 mb-3">Sheer Elegance</h3>
+                        <p class="text-neutral-600 mb-4">Delicate and airy, these allow natural light to filter beautifully, creating a soft, ethereal ambiance.</p>
+                        <a href="#" class="text-yellow-600 hover:text-yellow-700 font-medium group">
+                            View Collection <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Collection Item 2 --><div class="bg-white rounded-xl shadow-lg overflow-hidden reveal reveal-delay-2 transform hover:scale-102 transition-transform duration-300">
+                    <img src="blackout_curtains.png" alt="Heavy blackout curtains in a cozy bedroom" class="w-full h-72 object-cover">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-semibold text-neutral-900 mb-3">Blackout Sanctuary</h3>
+                        <p class="text-neutral-600 mb-4">Perfect for bedrooms and media rooms, offering ultimate privacy and light control for restful spaces.</p>
+                        <a href="#" class="text-yellow-600 hover:text-yellow-700 font-medium group">
+                            View Collection <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Collection Item 3 --><div class="bg-white rounded-xl shadow-lg overflow-hidden reveal reveal-delay-3 transform hover:scale-102 transition-transform duration-300">
+                    <img src="classic_drapes.png" alt="Classic heavy drapes in a formal dining room" class="w-full h-72 object-cover">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-semibold text-neutral-900 mb-3">Classic Grandeur</h3>
+                        <p class="text-neutral-600 mb-4">Timeless designs with rich textures and intricate patterns, adding a touch of traditional luxury.</p>
+                        <a href="#" class="text-yellow-600 hover:text-yellow-700 font-medium group">
+                            View Collection <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us / Testimonial --><section id="why-us" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <h2 class="text-base text-yellow-600 font-semibold tracking-wide uppercase mb-2">Our Commitment</h2>
+                    <p class="mt-2 text-4xl leading-tight font-bold text-neutral-900 sm:text-5xl mb-8">
+                        Why Choose <span class="gradient-text">Luza Curtains?</span>
+                    </p>
+                    <ul class="space-y-6 text-xl text-neutral-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-yellow-600 text-2xl mt-1 mr-4 flex-shrink-0"></i>
+                            <div>
+                                <h3 class="font-semibold text-neutral-900 mb-1">Unmatched Craftsmanship</h3>
+                                <p>Every curtain is a masterpiece, handcrafted with precision and passion by our experienced tailors.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-medal text-yellow-600 text-2xl mt-1 mr-4 flex-shrink-0"></i>
+                            <div>
+                                <h3 class="font-semibold text-neutral-900 mb-1">Premium Materials</h3>
+                                <p>We source only the highest quality fabrics and hardware, ensuring durability and luxurious appeal.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-yellow-600 text-2xl mt-1 mr-4 flex-shrink-0"></i>
+                            <div>
+                                <h3 class="font-semibold text-neutral-900 mb-1">Exceptional Service</h3>
+                                <p>From expert design advice to seamless installation, your satisfaction is our top priority.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="relative reveal reveal-delay-2">
+                    <img src="customer_happy.png" alt="Happy customer admiring new curtains" class="rounded-xl shadow-xl w-full">
+                    <div class="absolute -bottom-10 -left-10 bg-white p-8 rounded-xl shadow-2xl max-w-sm reveal reveal-delay-3">
+                        <p class="italic text-lg text-neutral-700 mb-4">"Luza Curtains transformed my living room! The quality and service were exceptional. Highly recommend!"</p>
+                        <p class="font-semibold text-neutral-900">- Sarah L., Satisfied Customer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action / Contact Section --><section id="contact" class="bg-neutral-900 py-24 text-white">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-base text-yellow-500 font-semibold tracking-wide uppercase mb-2 reveal">Let's Create Together</h2>
+            <p class="mt-2 text-4xl leading-tight font-bold text-white sm:text-5xl mb-8 reveal reveal-delay-1">
+                Begin Your Journey to <span class="gradient-text">Perfect Windows</span>
+            </p>
+            <p class="text-xl text-neutral-300 mb-12 max-w-3xl mx-auto reveal reveal-delay-2">
+                Whether you have a clear vision or need inspiration, our team is ready to help. Schedule a personal consultation today.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-6 reveal reveal-delay-3">
+                <a href="mailto:hello@luzacurtains.com" class="bg-yellow-600 text-white px-10 py-4 rounded-full text-xl font-medium hover:bg-yellow-700 transition shadow-lg">
+                    Email Us
+                </a>
+                <a href="tel:+15551234567" class="bg-transparent border-2 border-white text-white px-10 py-4 rounded-full text-xl font-medium hover:bg-white hover:text-neutral-900 transition shadow-sm">
+                    Call (555) 123-4567
+                </a>
+            </div>
+            <div class="mt-12 text-neutral-400 text-lg reveal reveal-delay-4">
+                <p>Visit our showroom: 123 Elegant Lane, Design City, DC 12345</p>
+                <p>Open Mon-Sat, 9:00 AM - 6:00 PM</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer --><footer class="bg-neutral-950 pt-16 pb-8 text-neutral-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1 reveal">
+                    <span class="text-3xl font-bold text-white brand-font">Luza<span class="gradient-text">Curtains</span></span>
+                    <p class="mt-4 text-sm leading-relaxed">Crafting elegance for your windows, one bespoke treatment at a time. Quality and design woven together.</p>
+                </div>
+                <div class="reveal reveal-delay-1">
+                    <h4 class="text-lg font-semibold text-white uppercase tracking-wider mb-5">Collections</h4>
+                    <ul class="space-y-3 text-base">
+                        <li><a href="#" class="hover:text-yellow-500 transition-colors">Sheer & Voile</a></li>
+                        <li><a href="#" class="hover:text-yellow-500 transition-colors">Blackout & Thermal</a></li>
+                        <li><a href="#" class="hover:text-yellow-500 transition-colors">Velvet & Silk</a></li>
+                        <li><a href="#" class="hover:text-yellow-500 transition-colors">Linen & Cotton</a></li>
+                    </ul>
+                </div>
+                <div class="reveal reveal-delay-2">
+                    <h4 class="text-lg font-semibold text-white uppercase tracking-wider mb-5">Services</h4>
+                    <ul class="space-y-3 text-base">
+                        <li><a href="#" class="hover:text-yellow-500 transition-colors">Custom Design</a></li>
+                        <li><a href="#" class="hover:text-yellow-500 transition-colors">Measuring & Consultation</a></li>
+                        <li><a href="#" class="hover:text-yellow-500 transition-colors">Professional Installation</a></li>
+                        <li><a href="#" class="hover:text-yellow-500 transition-colors">Motorization Options</a></li>
+                    </ul>
+                </div>
+                <div class="reveal reveal-delay-3">
+                    <h4 class="text-lg font-semibold text-white uppercase tracking-wider mb-5">Connect</h4>
+                    <ul class="space-y-3 text-base mb-6">
+                        <li><a href="#contact" class="hover:text-yellow-500 transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-yellow-500 transition-colors">Book an Appointment</a></li>
+                        <li><a href="#" class="hover:text-yellow-500 transition-colors">Showroom Location</a></li>
+                    </ul>
+                    <div class="flex space-x-6 text-xl">
+                        <a href="#" class="hover:text-yellow-500 transition-colors"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="hover:text-yellow-500 transition-colors"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-yellow-500 transition-colors"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-neutral-800 pt-8 text-center reveal reveal-delay-4">
+                <p class="text-sm">&copy; 2023 Luza Curtains. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+                navbar.classList.remove('bg-transparent', 'py-4');
+                navbar.classList.add('py-3');
+            } else {
+                navbar.classList.remove('navbar-scrolled', 'py-3');
+                navbar.classList.add('bg-transparent', 'py-4');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Close mobile menu if open
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Scroll-triggered reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, { threshold: 0.1 }); // Trigger when 10% of element is visible
+
+        revealElements.forEach(el => observer.observe(el));
+
+
+        // Hero image parallax
+        const heroImg = document.querySelector('.hero-img');
+        if (heroImg) {
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                const speed = parseFloat(heroImg.dataset.speed || 0.3);
+                heroImg.style.transform = `translateY(${scrollY * speed}px)`;
+            });
+        }
+
+    </script>
+</body>
+</html>
